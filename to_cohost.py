@@ -1,4 +1,4 @@
-import requests 
+import requests
 
 from random import choice
 from cohost.models.user import User

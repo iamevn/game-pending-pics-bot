@@ -4,7 +4,7 @@ import requests
 from random import choice
 
 from gamepending_vids import get_vids
-from secrets import TWITTER_BEARER_TOKEN, TWITTER_CONSUMER_KEY, TWITTER_ACCESS_SECRET, TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET
+from secrets import TWITTER_BEARER_TOKEN, TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET
 
 client = tweepy.Client(
   bearer_token=TWITTER_BEARER_TOKEN,
