@@ -1,6 +1,4 @@
 import tweepy
-import requests
-
 from random import choice
 
 from gamepending_vids import get_vids
@@ -22,16 +20,9 @@ auth = tweepy.OAuth1UserHandler(
 api = tweepy.API(auth)
 
 
-def post_vid(video, thumb_filename=None):
-    if thumb_filename is None:
-        thumb_url = video.best_thumbnail.url
-        img_format = thumb_url.split('.')[-1]
-        img_file = f'thumb.{img_format}'
-        with open(img_file, 'wb') as f:
-            f.write(requests.get(thumb_url).content)
-        print(f'Saved thumbnail for "{video.title}" as {img_file}')
-    else:
-        img_file = thumb_filename
+def post(video, img_file=None):
+    if img_file is None:
+        img_file = video.best_thumbnail.download()
 
     media = api.media_upload(img_file)
     res = client.create_tweet(text=f'from {video.title}\n{video.watchUrl}', media_ids=[media.media_id])
@@ -39,7 +30,7 @@ def post_vid(video, thumb_filename=None):
 
 
 def post_random():
-    post_vid(choice(get_vids()))
+    post(choice(get_vids()))
 
 
 if __name__ == '__main__':

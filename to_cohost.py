@@ -1,5 +1,3 @@
-import requests
-
 from random import choice
 from cohost.models.user import User
 from cohost.models.block import AttachmentBlock, MarkdownBlock
@@ -11,16 +9,9 @@ user = User.loginWithCookie(COHOST_COOKIE)
 project = user.getProject('game-pending-pics')
 
 
-def post_vid(video, thumb_filename=None):
-    if thumb_filename is None:
-        thumb_url = video.best_thumbnail.url
-        img_format = thumb_url.split('.')[-1]
-        img_file = f'thumb.{img_format}'
-        with open(img_file, 'wb') as f:
-            f.write(requests.get(thumb_url).content)
-        print(f'Saved thumbnail for "{video.title}" as {img_file}')
-    else:
-        img_file = thumb_filename
+def post(video, img_file=None):
+    if img_file is None:
+        img_file  = video.best_thumbnail.download()
 
     blocks = [
         AttachmentBlock(img_file),
@@ -31,7 +22,7 @@ def post_vid(video, thumb_filename=None):
 
 
 def post_random():
-    post_vid(choice(get_vids()))
+    post(choice(get_vids()))
 
 
 if __name__ == '__main__':

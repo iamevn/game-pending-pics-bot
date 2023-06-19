@@ -1,5 +1,6 @@
 from googleapiclient.discovery import build
 from dataclasses import dataclass
+import requests
 
 from secrets import YT_DATA_API_KEY
 
@@ -15,6 +16,15 @@ class Thumbnail:
     url: str
     width: int
     height: int
+
+    def download(self, outfilename=None):
+        if outfilename is None:
+            thumb_url = self.url
+            img_format = self.url.split('.')[-1]
+            outfilename = f'thumb.{img_format}'
+        with open(outfilename, 'wb') as f:
+            f.write(requests.get(thumb_url).content)
+        return outfilename
 
 
 @dataclass

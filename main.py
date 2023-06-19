@@ -1,26 +1,22 @@
-import requests
-from gamepending_vids import get_vids, pretty
 from random import choice
+
+from gamepending_vids import get_vids, pretty
 import to_cohost
 import to_twitter
 
 
 def multi_upload(video):
     print(pretty(video))
-    thumb_url = video.best_thumbnail.url
-    img_format = thumb_url.split('.')[-1]
-    thumbnail = f'thumb.{img_format}'
-    with open(thumbnail, 'wb') as f:
-        f.write(requests.get(thumb_url).content)
+    thumbnail = video.best_thumbnail.download()
     print(f'Saved thumbnail as {thumbnail}')
 
     try:
-        to_cohost.post_vid(video, thumbnail)
-    except e:
+        to_cohost.post(video, thumbnail)
+    except Exception as e:
         print(e)
     try:
-        to_twitter.post_vid(video, thumbnail)
-    except e:
+        to_twitter.post(video, thumbnail)
+    except Exception as e:
         print(e)
 
 
