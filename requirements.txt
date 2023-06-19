@@ -1,3 +1,4 @@
 cohost==0.2.6
 google_api_python_client==2.89.0
 Requests==2.31.0
+tweepy==4.14.0
