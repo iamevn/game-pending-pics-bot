@@ -1,3 +1,4 @@
+from collections.abc import Iterator
 from googleapiclient.discovery import build
 from dataclasses import dataclass
 import requests
@@ -54,7 +55,7 @@ class VideoInfo:
         return f'https://www.youtube.com/watch?v={this.videoId}'
 
 
-def get_snippets() -> dict:
+def get_snippets() -> Iterator[dict]:
     PAGE_SIZE = 50
     req = yt.playlistItems().list(part='snippet', playlistId=uploads_playlist, maxResults=PAGE_SIZE)
     page = req.execute()
