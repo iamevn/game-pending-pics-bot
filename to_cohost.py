@@ -11,14 +11,16 @@ user = User.loginWithCookie(COHOST_COOKIE)
 project = user.getProject('game-pending-pics')
 
 
-def post_vid(video):
-    thumb_url = video.best_thumbnail.url
-    img_format = thumb_url.split('.')[-1]
-    img_file = f'thumb.{img_format}'
-    with open(img_file, 'wb') as f:
-        f.write(requests.get(thumb_url).content)
-
-    print(f'Saved thumbnail for "{video.title}" as {img_file}')
+def post_vid(video, thumb_filename=None):
+    if thumb_filename is None:
+        thumb_url = video.best_thumbnail.url
+        img_format = thumb_url.split('.')[-1]
+        img_file = f'thumb.{img_format}'
+        with open(img_file, 'wb') as f:
+            f.write(requests.get(thumb_url).content)
+        print(f'Saved thumbnail for "{video.title}" as {img_file}')
+    else:
+        img_file = thumb_filename
 
     blocks = [
         AttachmentBlock(img_file),
