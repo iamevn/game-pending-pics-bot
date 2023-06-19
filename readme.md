@@ -3,7 +3,7 @@ Really basic code to upload a random thumbnail from Game Pending's YouTube chann
 
 Needs a [cohost cookie](https://github.com/valknight/Cohost.py#retrieving-your-cookie)
 and a [YouTube Data API key](https://developers.google.com/youtube/v3/docs)
-to be set in [`secrets.py`](secrets.py).
+to be set in [`keys.py`](keys.py).
 
 Also needs a bunch of twitter keys in there, god help you if you need to set this up yourself.
 I was only able to set this up because I had keys from an old project already set up years ago I wasn't using.

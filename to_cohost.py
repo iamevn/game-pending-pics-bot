@@ -3,7 +3,7 @@ from cohost.models.user import User
 from cohost.models.block import AttachmentBlock, MarkdownBlock
 
 from gamepending_vids import get_vids
-from secrets import COHOST_COOKIE
+from keys import COHOST_COOKIE
 
 user = User.loginWithCookie(COHOST_COOKIE)
 project = user.getProject('game-pending-pics')

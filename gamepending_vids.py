@@ -3,7 +3,7 @@ from googleapiclient.discovery import build
 from dataclasses import dataclass
 import requests
 
-from secrets import YT_DATA_API_KEY
+from keys import YT_DATA_API_KEY
 
 yt = build('youtube', 'v3', developerKey=YT_DATA_API_KEY)
 channel_id ='UCgciOJ_c_eiOT8uqOzOLFRQ'
