@@ -26,7 +26,10 @@ def post(video, img_file=None):
 
     media = api.media_upload(img_file)
     res = client.create_tweet(text=f'from {video.title}\n{video.watchUrl}', media_ids=[media.media_id])
-    print(res)
+    if 'id' in res.data:
+        print(f'posted to https://twitter.com/GamePendingPics/status/{res.data["id"]}')
+    else:
+        print(res)
 
 
 def post_random():

@@ -18,7 +18,10 @@ def post(video, img_file=None):
         MarkdownBlock(f'from [{video.title}]({video.watchUrl})'),
     ]
     newPost = project.post('', blocks, tags=['bot', 'gamepending', 'youtube'])
-    print(f'posted at {newPost.url}')
+    if hasattr(newPost, 'url'):
+        print(f'posted at {newPost.url}')
+    else:
+        print(newPost)
 
 
 def post_random():
