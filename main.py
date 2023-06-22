@@ -3,6 +3,7 @@ from random import choice
 from gamepending_vids import get_vids, pretty
 import to_cohost
 import to_twitter
+import to_mastodon
 
 
 def multi_upload(video):
@@ -18,8 +19,13 @@ def multi_upload(video):
         to_twitter.post(video, thumbnail)
     except Exception as e:
         print(e)
+    try:
+        to_mastodon.post(video, thumbnail)
+    except Exception as e:
+        print(e)
 
 
 if __name__ == '__main__':
     video = choice(get_vids())
     multi_upload(video)
+
